@@ -1,0 +1,32 @@
+% ================================================================================
+% Section 3: The Modulo Trick - Intuitive Introduction
+% ================================================================================
+\section{Understanding the Modulo Trick}
+
+\begin{frame}{What is the Modulo Trick? An Intuitive Approach}
+    \begin{itemize}
+        \item Imagine you're trying to guess a number, but you can only ask questions about its remainder when divided by certain numbers.
+        \item \textbf{Example:} I'm thinking of a number $x$.
+        \begin{itemize}
+            \item If I tell you $x \equiv 1 \pmod 2$ (odd), what do you know?
+            \item If I tell you $x \equiv 2 \pmod 3$, what do you know?
+            \item Combining both, you can narrow down possibilities!
+        \end{itemize}
+        \item This is exactly what the modulo trick does - it uses remainders to restrict possible values of exponents.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The Basic Idea of the Modulo Trick}
+    \begin{block}{Core Concept}
+        Instead of solving $1+p^a = q^b + r^c$ directly, we ask:
+        "What must be true about $a,b,c$ modulo different numbers?"
+    \end{block}
+
+    \vspace{0.3cm}
+    \textbf{Why does this help?}
+    \begin{itemize}
+        \item Exponential expressions have predictable patterns modulo $m$
+        \item By choosing the right moduli, we can force contradictions unless exponents are small
+        \item Once exponents are bounded, we can check all remaining possibilities by brute force
+    \end{itemize}
+\end{frame}

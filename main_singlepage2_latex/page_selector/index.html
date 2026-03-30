@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Slide Selector</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">main_singlepage2_latex</p>
+          <h1>Slide Selector</h1>
+          <p class="subtle">Choose which pages to keep or delete, then save the selection.</p>
+        </div>
+        <div class="actions">
+          <a class="ghost" href="/pdf/main.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+          <button id="keep-all" type="button">Keep All</button>
+          <button id="delete-all" type="button">Delete All</button>
+          <button id="save" type="button" class="primary">Save Selection</button>
+        </div>
+      </header>
+
+      <section class="statusbar">
+        <span id="summary">Loading pages...</span>
+        <span id="save-status" class="subtle"></span>
+      </section>
+
+      <section id="pages" class="grid" aria-live="polite"></section>
+    </main>
+
+    <template id="page-card-template">
+      <article class="card keep">
+        <div class="card-head">
+          <strong class="page-title"></strong>
+          <button type="button" class="toggle">Keep</button>
+        </div>
+        <img class="thumb" alt="">
+      </article>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

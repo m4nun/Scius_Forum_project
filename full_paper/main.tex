@@ -1,0 +1,826 @@
+\documentclass[12pt]{article}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+% Enable line breaks for Thai text
+\XeTeXlinebreaklocale “th_TH” %สำหรับตัดคำ
+% Set up Thai fonts
+
+\newfontfamily\thaifont[%
+ItalicFont={Sarabun-Bold.ttf},%
+BoldFont={Sarabun-Bold.ttf},%
+Script=Thai,%
+Scale=MatchLowercase,%
+WordSpace=1.35,%
+Mapping=tex-text,%
+]{Sarabun-Regular.ttf}
+\usepackage{amsmath,amsthm,amssymb,amsfonts, enumitem, fancyhdr, color, comment, graphicx, environ}
+\usepackage[theorems]{tcolorbox}
+\usepackage{color} 
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{tocloft} % สำหรับปรับแต่งสารบัญ
+\renewcommand{\contentsname}{Contents}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+
+%\title{On the Limitations of the Modulo Trick Method in Solving Exponential Diophantine Equations of the form $1+p^a=q^b+r^c$}
+%\author{Burapat Suwanprasert and Kawin Chumtong \\
+%Naresuan University}
+%\date{January 2026}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+
+
+% Title in Thai
+\begin{center}
+
+        \vspace*{0.7cm}
+    \normalsize\text{\thaifont ข้อจำกัดของวิธี Modulo Trick ในการแก้สมการไดโอแฟนไทน์เลขยกกำลังในรูป $1 + p^a = q^b + r^c$}
+    
+    \vspace{0.6cm}
+    
+    % Title in English
+   \normalsize{
+    On the limitations of the modulo trick method in solving \\exponential Diophantine equations of the form $1+p^a=q^b+r^c$
+   } 
+    \vspace{7cm}
+    
+    % Authors
+    \normalsize\text{By}
+    
+    \vspace{1.25cm}
+    
+\begin{array}{lrr}
+     \text{Mr. Burapat Suwanprasert}&\text{Student ID:} &\text{67983443}   \\
+     \text{Mr. Kawin Chumtong}&\text{Student ID:} &\text{67983115}  
+\end{array}
+    
+    \vspace{2cm}
+    
+    % Date
+    \fontsize{14}{18}\selectfont
+   
+    
+    \vfill
+    \text{February 2026}
+    \vspace{1.5cm}
+    
+    % Affiliation
+    \begin{spacing}{}
+        \fontsize{14}{18}\selectfont
+        \text{Science Classrooms in University-Affiliated School Project (SCiUS)} \\
+        \text{Naresuan University} \\
+        \text{Naresuan University Secondary Demonstration School}
+    \end{spacing}
+\end{center}
+\thispagestyle{empty}
+
+\newpage
+\thispagestyle{empty}
+
+\begin{tabular}{ l l }
+\textbf{Title} &``On the limitations of the modulo trick method in solving exponential \\
+& Diophantine equations of the form $1+p^a=q^b+r^c$"
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{array}{llrr}
+     \text{By}&\text{Mr. Burapat Suwanprasert}&\text{Student ID:} &\text{67983443}   \\
+     &\text{Mr. Kawin Chumtong}&\text{Student ID:} &\text{67983115}  
+\end{array}
+\end{center}
+\vspace{1cm}
+
+    
+\begin{center}
+\begin{minipage}{13cm}
+has been approved by the advisor and project examination committees\\
+as partial fulfillment of the requirements for the educational curriculum\\
+\centering of Naresuan University Secondary Demonstration School
+\end{minipage}
+\end{center}
+
+\vspace{1cm}
+
+\begin{tabular}{ c c }
+................................................. & Project advisor \\ 
+ \\
+(Assoc. Prof. Dr.Kijti Rodtes)    
+\end{tabular}
+
+\vspace{8cm}
+
+\begin{flushright}
+\begin{tabular}{c}
+ \textbf{Approval} \\
+ \\
+................................................... \\
+ \\
+(Dr. Prasun Tantisanoh) \\
+ \\
+Acting Deputy Academic Affairs Director\\
+ \\
+01/26
+\end{tabular}
+\end{flushright}
+\clearpage
+\pagenumbering{Alph}
+\newpage
+\begin{center}
+\section*{Acknowledgement}
+\addcontentsline{toc}{section}{Acknowledgement}
+\end{center}
+The researchers are very grateful to our supervisor, Kijti Rodtes, for his many recommendations. We learned a great deal, including how to write a research paper on pure mathematics. Due to his extensive experience, he was able to identify the errors we made when creating our research paper. This project would not happen without support from SCiUS and all of the staff. We are grateful to our parents for their unwavering support in everything. We are grateful to our friends at SCiUS for the wonderful environment we experienced during our two years of education.
+\vspace{1cm}
+\begin{flushright}
+\begin{tabular}{ c }
+ Burapat Suwanprasert \\ 
+ Kawin Chumtong \\
+ The authors
+\end{tabular}
+\end{flushright}
+\newpage 
+
+\begin{tabular}{ l l }
+\textbf{Title} & On the limitations of the modulo trick method in solving exponential \\
+& Diophantine equations of the form $1+p^a=q^b+r^c$ \\ 
+\textbf{Academic Year} & 2025 \\
+\textbf{Author} & Burapat Suwanprasert, Kawin Chumtong \\
+\textbf{Organization} & Naresuan University Secondary Demonstration School
+\end{tabular}
+\begin{center}
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+\end{center}
+The resolution of exponential Diophantine equations, equations where unknowns appear in the exponents, has historically relied on a dichotomy between elementary congruence methods and sophisticated analytical tools like Baker’s theory of linear forms in logarithms. Among the most accessible elementary techniques is the \textbf{modulo trick}, which utilizes a sequence of carefully selected moduli to establish congruences that bound or eliminate potential solution sets. While researchers have long observed heuristically that certain equation structures are ``not amenable'' to modulo trick, the literature has lacked a rigorous framework to prove such impossibility. 
+
+A primary contribution of this research is the introduction of formal, precise definitions for the notions of ``solvable by the modulo trick'' and ``non-solvable by the modulo trick.'' We define solvability based on whether a finite sequence of moduli suffices to reduce the set of potential solutions to a bounded, and thus computable, set. To support this framework, we develop the framework, which proves that any finite sequence of modular restrictions can be condensed into a single congruence solution set under the least common multiple of those moduli.
+
+Utilizing these definitions, we investigate equations of the general form $1 + p^a = q^b + r^c$. We provide a rigorous proof that the specific structure $1 + (pq)^a = p^b + q^c$ is inherently non-solvable by the modulo trick for fixed coprime positive integers $p$ and $q$. Furthermore, we generalize our methodology to prove that alternative forms, such as $a^x - a^y = b^z - b^w$, also satisfy the criteria for non-solvability. These results provide a mathematical validation for prior heuristic observations, such as those by \cite{eDe} Brenner and Foster, and offer a diagnostic tool for determining when elementary modular methods are fundamentally inadequate, necessitating the transition to more advanced transcendental methods.
+
+
+\newpage
+\tableofcontents
+% \begin{center}
+%     \textbf{Table of Contents}
+% \end{center}
+
+% \noindent % Prevents indentation if not in a float environment
+% \begin{tabularx}{\textwidth}{|X|r|} % Example: one fixed-width, one variable, one fixed
+%     \hline
+%     {\bf Header 1} & {\bf Header 2 (Long text here)}\\
+%     \hline
+%     Row 1, Col 1 & This column will stretch to fill the remaining space. \\
+%     \hline
+%     Row 2, Col 1 & More content that needs to wrap around and fill space. \\
+%     \hline
+% \end{tabularx}
+% \clearpage
+
+\newpage
+\listoffigures
+\newpage
+\pagenumbering{arabic}
+\begin{center}
+    \section*{Chapter 1}
+    \section*{Introduction}
+    \addcontentsline{toc}{section}{Chapter 1: Introduction}
+\end{center}
+\hspace*{0.5cm} The study of exponential Diophantine equations—equations where the unknowns appear in the exponents—has long been a cornerstone of number theory. A primary historical driver of this field was Catalan’s Conjecture, proposed in 1844, which stated that the only solution in natural numbers to $x^a - y^b = 1$ for $a, b > 1$ and $x, y > 1$ is $3^2 - 2^3 = 1$. This conjecture remained open for over 150 years until Preda Mihăilescu’s proof in 2002, which utilized the theory of cyclotomic fields and linear forms in logarithms. This breakthrough underscored the deep complexity inherent in these equations, where a deceptively simple statement requires sophisticated modern machinery to resolve.
+
+\hspace*{0.5cm} In practice, many researchers first attempt to solve these equations using elementary methods, most notably the \textbf{modulo trick}. This technique involves choosing a sequence of moduli to establish congruences that restrict the possible values of the unknown exponents. Brenner and Foster (1982) utilized these methods to solve numerous equations with four or five terms. However, they observed a significant limitation in their work; they remarked that certain classes of equations, such as 
+$$(pq)^x - p^z - q^w + 1 = 0 \quad \text{and} \quad p^x - p^y + q^z - q^w = 0$$
+did not seem ``amenable'' to their congruence-based methods. These specific forms, particularly those where powers of the same prime are subtracted, appeared to require more sophisticated tools, such as the upper bounds derived by Tijdeman and Wang \cite{wang} using Baker’s method and linear forms in logarithms.\\
+\hspace*{0.5cm} The goal of this paper is to bridge the gap between heuristic observations and formal impossibility proofs. We mainly investigate equations of the general form:
+\[1+p^a = q^b + r^c \]
+for fixed positive integers $p, q, r$. While previous literature \cite{eDe} identifies specific cases e.g., when $(p,q,r) = (2,2,3)$ or $(5,3,3)$ as solvable with the modulo trick, a formal definition of what constitutes ``solvability'' in this context has remained elusive.
+
+\hspace*{0.5cm} In the following chapters, we formalize the definitions of ``solvable'' and ``non-solvable'' by the modulo trick based on whether a finite sequence of moduli suffices to reduce the set of solutions to a bounded set. We provide a rigorous proof that equation $1+(pq)^x=p^y+q^z$, when $p,q$ are given coprimes, is non-solvable with modulo trick. The definitions we used in the first part of the paper are intentionally defined to be used with only single form of exponential Diophantine equation; so we bring more generalized version of our definition in order to extend our scope for alternative form of exponential Diophantine equation. Together with period of exponent residue lemma (lemma 8), we also provide proof that equation $p^x-p^y+q^z-q^w=0$, when $p,q$ are given positive integers, is non-solvable with modulo trick. \\
+\hspace*{0.5cm}These results also fulfill the prior research comments of \cite{eDe} Brenner and Foster; state that the equations $1+(pq)^x=p^y+q^z$ and $p^x-p^y+q^z-q^w=0$, in the case when $p,q$ are given distinct primes, which are special cases of our results, seems not to be amenable to their method, i.e., non-solvable with modulo trick. 
+
+ By defining these criteria, we provide a tool for researchers to determine when the modulo technique is inherently inadequate and when more sophisticated methods are strictly necessary.\\
+\subsection*{Scope}
+\begin{itemize}
+    \item[-] Research mainly focus on the exponential Diophantine equations in the form $1+p^a =q^b + r^c$. The research will examine their solvability when the solution could/couldn't be provided by only the modulo trick.
+     \item[-] Research also investigate alternative form of exponential Diophantine equations, i.e., $p^x-p^y+q^z-q^w=0$.
+\end{itemize}
+\subsection*{Definitions}
+\begin{itemize}
+    \item[-] \textbf{Exponential Diophantine equation} is equation in which the bases are (given or unknown) integers; the exponents are unknown integers.  
+    \item[-] \textbf{Modulo trick} is a method that uses among of significant modulo to reduce the possibility of unknown variables.
+    \item[-] \textbf{Periodic sequence} is sequence that repeats in a cycle.
+\end{itemize}
+% \hspace*{0.4in} The exponential Diophantine equation$^{\cite{eDe}}$ is an equation in which the bases are given or unknown integers; the exponents are unknown integers. One of the most celebrated examples is Catalan's Conjecture$^{\cite{Bilu2004Asterisque}}$, also known as Mihăilescu's Theorem$^{\cite{Mihailescu2004}}$. Proposed by Eugène Catalan in 1844, this conjecture states that the only solution in natural numbers of $x^a-y^b=1$
+%  for $a,b>1,x,y\geq1 $ is $x=3,a=2,y=2,b=3$. This deceptively simple statement had remained unproven for over 150 years until Preda Mihăilescu provided a complete proof in 2002. The journey to proving Catalan's Conjecture involved synthesis of sophisticated techniques from various areas of number theory, including algebraic number theory and the theory of linear forms in logarithms, underscoring the deep complexity inherent in these equations which make the exponential Diophantine equations are interested.
+%  \\
+%  \\
+%  \hspace*{0.4in} In \cite{eDe} the modulo trick is the main tool to solve exponential Diophantine equations. The modulo trick is the method using modulo congruent to establish the contradiction. This method is elementary and useful in some form of exponential Diophantine equations. ie, 
+%  \begin{equation}
+%      1+p^a=q^b+r^c \label{main}
+%  \end{equation}
+% For fixed positive integers $p,q,r$ and solutions are sought $a,b,c \in \mathbb{Z}_{\geq 0}$. \\We have the case $(p,q,r) = (2,2,3), (2,2,5), (2,2,7), (5,3,3), (5,3,23), (5,7,19),(5,7,7),\\(5,11,11), (5,11,17),(13,17,17),(17,7,7),(67,11,17)$ and the case when $q\equiv_p1$. That could solve$^{\cite{eDe}}$with only modulo trick. 
+%  \\
+%  \\
+%  \hspace*{0.4in} On the other hand, There are some exponential Diophantine equations that are mentioned in \cite{eDe} that couldn't be solved with only modulo trick. It turns out the question that ``What is the condition of $p,q,r$ in \eqref{main} that could/couldn't be solved with only modulo trick".
+\newpage
+\begin{center}
+    \section*{Chapter 2}
+    \section*{Literature review}
+    \addcontentsline{toc}{section}{Chapter 2: Literature review}
+\end{center}
+
+
+\hspace*{0.5cm}The resolution of exponential Diophantine equations has historically progressed from elementary congruence methods to the application of deep results in transcendental number theory (e.g., Baker's theorem). The ``modulo trick," or method of congruences, serves as the most accessible entry point for solving these equations; however, as noted by various authors, the effectiveness of this method depends heavily on the algebraic structure of the equation.
+
+\subsection*{Elementary methods. }
+\hspace*{0.5cm}Brenner and Foster \cite{eDe} studied the special cases of four-term and five-term equations. Their work was largely successful in solving equations where terms did not allow for infinite congruence chains. For instance, equations of the form $1+p^a = q^b + r^c$ were often solved by reducing them to congruences $1+p^a \equiv q^b + r^c \pmod {m_i} $ that only few $(a,b,c)$ are solutions.
+
+\subsection*{Non-amenable cases. }
+\hspace*{0.5cm} A turning point occurred in the literature when researchers identified equations that resisted modular treatment. Brenner and Foster \cite{eDe} certain classes such as 
+$$(pq)^x - p^y - q^z + 1 = 0 \quad \text{and} \quad p^x - p^y + q^z - q^w = 0$$
+were explicitly labeled as ``not amenable'' to congruences or cannot be fully investigated by reducing it to congruences. The difficulty arises from the existence of ``degenerate" solutions or the ability that exponents can grow simultaneously while maintaining congruence for any modulus $m$. 
+
+
+
+\subsection*{Solutions base on Baker's method}
+\hspace*{0.5cm}  In 1988, Tijdeman and Wang \cite{wang} utilized Baker's theory of linear forms in logarithms to non-amenable cases. Unlike the modulo trick, which seeks to eliminate solutions; their method provide effective upper bounds on the size of the exponents. They solved all cases of more general equations:
+\begin{enumerate}
+    \item $p^x q^y \pm p^z \pm q^w \pm 1 = 0$
+    \item $p^x \pm p^y \pm q^z \pm q^w = 0$
+\end{enumerate}
+for $p=2$ and $q=3$ with two positive and two negative terms.
+
+
+\hspace*{0.5cm} More recent extensions of these results, Deze and Tijdeman \cite{DEZE199247} have established significant upper bounds for prime bases $p < q < 200$. Theorem 1 and theorem 2 of their work show that $2^{15}$ serves as an upper bound for all powers in non-degenerate solutions to 1. and 2.
+
+
+\subsection*{The gap in the literature}
+\hspace*{0.5cm} While the literature provides a clear distinction between equations solved by ``elementary methods" and those solved by ``linear forms in logarithms," there is a lack of a formal, rigorous definition of why the former fails where the latter succeeds. Most authors rely on the heuristic that an equation \textit{seems} non-amenable. This paper fills that gap by formalizing the criteria for non-solvability via the modulo trick, specifically targeting the structures identified by Brenner and Foster.
+
+
+\newpage
+\begin{center}
+    \section*{Chapter 3}
+    \section*{Methodology}
+    \addcontentsline{toc}{section}{Chapter 3: Methodology}
+\end{center}
+%\subsection*{Motivation}
+%\hspace*{0.5cm} In the 19th century, Évariste Galois brought the word `solvable group' to refer to solvability of polynomial. Pierre Wantzel also proved the impossibility of angle trisection performed with only compass and straightedge. These inspire us to see whether a problem can be solved using a specific method. In this paper, we try to give the formal definition of modulo trick, the method used widely in academic research about Diophantine equation, and try to give the conditions when modulo trick can solve the equation 
+%$1+p^a=q^b+r^c$. \\
+%\subsection*{Method}
+
+
+\begin{figure}[h!]
+    \centering
+
+\begin{tikzpicture}[
+    node distance=1cm,
+    every node/.style={font=\small},
+    box/.style={
+        rectangle,
+        draw,
+        rounded corners,
+        align=center,
+        minimum width=4.5cm,
+        minimum height=0.9cm
+    },
+    decision/.style={
+        diamond,
+        draw,
+        align=center,
+        aspect=2,
+        inner sep=2pt
+    },
+    arrow/.style={->, thick}
+]
+
+% Nodes
+\node[box] (1) {Proposition 1: Show that the existence of an upper bound for the \\
+variables restricts the number of possible solutions to \eqref{main} to a finite set};
+
+\node[box, below=of 1] (2)
+{Give definition of solvable and non-solvable with modulo trick};
+
+\node[box, below=of 2] (3)
+{Develop lemmas and definitions using in main theorem};
+
+\node[box, below=of 3] (4)
+{Theorem 1 : Prove that a special case of equation \eqref{main} is non-solvable};
+
+\node[box, below=of 4] (5)
+{Generalize prior lemmas and definitions for different forms \\ of exponential Diophantine equation};
+
+\node[box, below=of 5] (6)
+{Develop lemma 8 : Period of exponent residue leads to proving of theorem 2};
+
+\node[box, below=of 6] (7) 
+{Theorem 2 : An alternative form of exponential Diophantine equation \\ is non-solvable with modulo trick}
+
+\node[box, below=of 7] (8) 
+{Both theorems derive corollaries affirming prior research' comments}
+
+% Arrows
+\draw[arrow] (1) -- (2);
+\draw[arrow] (2) -- (3);
+\draw[arrow] (3) -- (4);
+
+\draw[arrow] (4) -- (5);
+\draw[arrow] (5) -- (6);
+\draw[arrow] (6) -- (7);
+\draw[arrow] (7) -- (8);
+
+% False loop
+
+\end{tikzpicture}
+    \caption{Methodology flowchart.}
+    \label{fig:placeholder}
+\end{figure}
+\newpage
+\begin{center}
+    \section*{Chapter 4}
+    \section*{Results and discussion}
+    \addcontentsline{toc}{section}{Chapter 4: Results and discussion}    
+\end{center}
+\hspace*{0.5cm} First, we introduce the obvious and straightforward proposition which is important for using modulo trick to solve exponential Diophantine equation of the form,
+\begin{equation}
+    1+p^a = q^b + r^c \label{main}
+\end{equation}
+for fixed $p,q,r\in \mathbb{Z}^+$ and sought for $a,b,c \in \mathbb{Z}_{\geq 0 }$.\\
+\textbf{Remark. }Solutions of \eqref{main} are called trivial solutions if $b=0$ or $c=0$. In this paper, we consider only non-trivial solutions. The term `computable' means that all solutions of that equation are accessible or could be computed in finite time. \\
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{theorem}{Theorem}
+
+\begin{proposition}
+   Equation \eqref{main} is computable if at least one of these conditions hold,
+   \begin{enumerate}
+       \item There exists an integer $M$ such that $a\leq M$ for any $(a,b,c)$ which is a solution of \eqref{main}.
+       \item There exist integers $M_{b},M_{c}$ such that $b\leq M_{b} $ and $ c\leq M_{c}$  for any $(a,b,c)$ which is a solution of \eqref{main}.
+   \end{enumerate}
+  % when computable means able to compute all solutions in finite time.
+\end{proposition} 
+\noindent
+\textit{Proof for condition 1.}
+\\Suppose $M \in \mathbb{Z}^+$ such that $a \leq M$ for each $(a,b,c)$ which is a solution of \eqref{main}.\\
+Consider
+\begin{center}
+  \begin{array}{lcl}
+   q^b+r^c &= &1+p^a \\
+   q^b &=& 1+p^a-r^c \\
+       &\leq& p^a  \; \leq \;p^M.
+\end{array}  
+\end{center}
+Hence, $b \leq \dfrac{M\log(p)}{\log(q)}$ . In the same way, $c \leq \dfrac{M\log(p)}{\log(r)}$. \\
+We can see that if $(a,b,c)$ is solution of \eqref{main}, then it belongs to the set \[\chi = \{(x,y,z)\in \mathbb{Z}_{\geq0}^3 \;| \; x\leq M,\;y\leq \dfrac{M\log(p)}{\log(q)},\;z\leq \dfrac{M\log(p)}{\log(r)}\}.\]
+Since $\chi$ is finite set, every element in $\chi$ can be checked whether it is a solution or not in finite time and this equation is computable. \\
+\\
+\noindent
+\textit{Proof for condition 2.} \\
+Suppose $M_b, \;M_c \in \mathbb{Z}^+$ such that $b \leq M_b,\; c\leq M_c$ for each $(a,b,c)$ which is a solution of \eqref{main}.
+\begin{center}
+  \begin{array}{lcl}
+   1+p^a &= &q^b+r^c \\
+   p^a &=& q^b+r^c-1 \\
+       &\leq& q^{M_{b}} + r^{M_{c}}
+\end{array}  
+\end{center}
+Hence, $a \leq \dfrac{\log(q^{M_{b}} + r^{M_{c}})}{\log(p)} $ . \\
+We can see that if $(a,b,c)$ is solution of \eqref{main}, then it belongs to the set \[\chi = \{(x,y,z)\in \mathbb{Z}_{\geq0}^3 \;| \; x\leq \dfrac{\log(q^{M_b + M_c})}{\log(p)},\;y\leq M_b, \;z\leq M_c\}.\]
+Since $\chi$ is finite set, every element in $\chi$ can be checked whether it is a solution or not in finite time and this equation is computable. $\square$ \\
+\newpage
+The following example shows how to use the proposition to complete the solution of the exponential Diophantine equation with the modulo trick. \\\\
+\textbf{Example : } Solve the exponential Diophantine equation $1+5^a = 7^b + 7^c$.\\
+\textit{Solution. }First, suppose that $a,b,c > 2$. Then consider
+\[1+5^a = 7^b + 7^c \implies 1+5^a \equiv 2 \pmod 9.\]
+Hence, $a \equiv 0 \pmod 6$. Then consider 
+\[1+5^a = 7^b + 7^c \implies 1+5^a \equiv 0 \pmod 7.\] We can see that $1+5^a \equiv 2 \pmod 7$ when $a\equiv 0 \pmod 6$ and $7^b + 7^c \equiv 0 \pmod 7$ for any $b,c \in \mathbb{Z}_{>2}$. Hence a contradiction. by symmetry of $b,c$, we consider two remaining cases,
+\[a\leq 2 \; \;\;\text{or} \;\; b,c\leq 2.\]
+By proposition 1, this equation is computable and only solutions are $(0,0,0)$. \\\\
+\hspace*{0.5cm}As has been shown, proposition 1 helps us to complete the solution without going into the details. In summary, the method of the modulo trick follows the diagram below.
+\begin{figure}[h!]
+    \centering
+
+\begin{tikzpicture}[
+    node distance=1cm,
+    every node/.style={font=\small},
+    box/.style={
+        rectangle,
+        draw,
+        rounded corners,
+        align=center,
+        minimum width=4.5cm,
+        minimum height=0.9cm
+    },
+    decision/.style={
+        diamond,
+        draw,
+        align=center,
+        aspect=2,
+        inner sep=2pt
+    },
+    arrow/.style={->, thick}
+]
+
+% Nodes
+\node[box] (eq) {$1+p^a = q^b + r^c$};
+
+\node[box, below=of eq] (choosem)
+{Choose $m \in \mathbb{Z}^+$};
+
+\node[box, below=of choosem] (mod)
+{Consider $1+p^a \equiv q^b + r^c \pmod m$};
+
+\node[decision, below=1cm of mod] (bound)
+{Found upper bound\\ of $a$ or $b,c$};
+
+\node[box, below=of bound] (prop)
+{Proposition 1};
+
+\node[box, below=of prop] (complete)
+{Complete solution};
+
+% Arrows
+\draw[arrow] (eq) -- (choosem);
+\draw[arrow] (choosem) -- (mod);
+\draw[arrow] (mod) -- (bound);
+
+\draw[arrow] (bound) -- node[right] {True} (prop);
+\draw[arrow] (prop) -- (complete);
+
+% False loop
+\draw[arrow]
+    (bound.east)
+    -- node[pos=0.05, right, yshift=7pt] {False}
+    ++(2,0)
+    |- (choosem.east);
+
+\end{tikzpicture}
+    \caption{Method of modulo trick overview.}
+    \label{fig:placeholder}
+\end{figure}
+\newpage
+As we can see, the modulo trick is method that uses a finite number of moduli to reduce number of possible values for a variable. Imagine if we can turn each step in modulo trick into mathematical object, so we create a finite sequence of sets that represents steps of using moduli sequentially. Each set contains all solution from preceding set that must also make equation congruent in its respect modulus. Let $m_1,m_2,...,m_k$ be the sequence of moduli used for the modulo trick and $p,q,r$ are positive integers. For $1 \leq i \leq k$, we define \\
+ \[S^{p,q,r}_0 = \mathbb{Z}_{\geq0}^3 \; \;  \text{and} \;\; S^{p,q,r}_i = \{(a,b,c)\in S^{p,q,r}_{i-1} \; | \; 1+p^a \equiv q^b+r^c \; \pmod {m_i}\}.\]
+\hspace*{0.5cm} We can see that every solution of \eqref{main} is contained in last step set $S^{p,q.r}_k$. By applying proposition 1 to this set instead of solution set, we still get same result. Therefore, it is reasonable to define the meaning of \textit{solvable} and \textit{non-solvable} with modulo trick which derived  from proposition 1.\\\\ 
+\textbf{Definition} : The equation \eqref{main} is called ``solvable with modulo trick" if there exists finite sequence of moduli $m_1,m_2,...,m_k \in \mathbb{Z}^{+}$ used for modulo trick such that at least one of these conditions holds,
+\begin{itemize}
+    \item There exists an integer $M_a$ such that $M_a \geq a$ for all $(a,b,c) \in S^{p,q,r}_k$.
+    \item There exist integers $M_b,M_c$ such that $M_b \geq b$ and  $M_c \geq c$  for all $(a,b,c) \in S^{p,q,r}_k$.
+\end{itemize}
+\textbf{Definition} : The equation \eqref{main} is called ``non-solvable with modulo trick" if for any finite sequence of moduli $m_1,m_2,...,m_k \in \mathbb{Z}^{+}$ used for modulo trick, both of these conditions hold,
+\begin{itemize}
+    \item For any integer $M_a$, there exists $(a,b,c) \in S^{p,q,r}_{k}$ such that $M_a < a$.
+    \item For every pair of integers $M_b,M_c$, there exists $(a,b,c) \in S^{p,q,r}_{k}$ such that $M_b < b$ or $M_c < c$.
+\end{itemize}
+\hspace{0.5cm} With this definition, almost all of exponential Diophantine equations of the form $1+p^a = q^b + r^c$ in \cite{eDe} are solvable with modulo trick, for instance, \\
+\[1+5^a = 7^b + 7^c.\]
+Since there exist $m_1 = 7, \;m_2=3$, we have
+\[S_2^{5,7,7} = \{ (a,b,c)\in \mathbb{Z}_{\geq0}^3 \; |\; b,c \leq 0\; \}\; .\] 
+Since $S_2^{5,7,7}$ have $b,c$ upper bound, $1+5^a  = 7^b +7^c $ is solvable with modulo trick.\\\\
+\hspace*{0.5cm}For the case of non-solvable with modulo trick, there are some candidate such as $1+6^a = 3^b + 2^c$ in which for many choice of $m_1, m_2,...,m_k$, it not seem to satisfies any solvable with modulo trick conditions. To find out that this equation is non-solvable with modulo trick, we develop tool that is the following lemmas and can finally prove it in theorem 1.\\\\
+For convenient, we notate congruence solution sets of equation \eqref{main} \\
+\textbf{Notation} : $A_k = \{(a,b,c) \in \mathbb{Z}_{\geq0}^3 \; | \; 1+p^a \equiv q^b+r^c \; \pmod {k}\}$.
+\begin{lemma} Let $m_1,m_2,...,m_k\in \mathbb{Z}^+$ be sequence of moduli used for modulo trick. We have
+    \[S^{p,q,r}_k = \bigcap_{i=1}^k A_{m_i}.\]
+\end{lemma}
+\noindent
+\textit{Proof.} It is equivalent to show that \[x\in S^{p,q,r}_k \iff x \in \bigcap_{i=1}^kA_{m_i}.\] \\
+$(\Rightarrow)$ Suppose that $x\in S^{p,q,r}_k$. By definition, $S^{p,q,r}_i \subseteq S^{p,q,r}_{i-1}$ for $i>0$, then $x \in S^{p,q,r}_{k-1}, S^{p,q,r}_{k-2},...,S^{p,q,r}_0$. Thus 
+\[1+p^a \equiv q^b+r^c \pmod {m_k}\]
+\[1+p^a \equiv q^b+r^c \pmod {m_{k-1}}\]
+\[\vdots\]
+\[1+p^a \equiv q^b+r^c \pmod {m_1}.\]
+Since $x\in S^{p,q,r}_0 = \mathbb{Z}_{\geq0}^3$, imply $x\in A_{m_i} $ for each $i=1,2,...,k$. Therefore, $x\in \bigcap_{i=1}^kA_{m_i}$.\\
+$(\Leftarrow)$ Suppose $x \in \bigcap_{i=1}^k A_{m_i}$. Observe that for each $i=0,1,...,k-1$,
+\[ x\in A_{m_{i+1}}\; \text{and} \; x\in S^{p,q,r}_{i} \iff  x \in S^{p,q,r}_{i+1}.\]
+Since $x\in A_{m_i} $ for any $i=1,2,...,k$,
+\[x\in  \mathbb{Z}^3_{\geq0} = S^{p,q,r}_0 \iff x\in S^{p,q,r}_{1} \iff ....\iff x\in S^{p,q,r}_{k-1} \iff  x \in  S^{p,q,r}_{k}. \, \square \] 
+This fact can be easily seen by applying the property of the least common multiple. We shall not provide a detailed proof here. \\
+\textbf{Fact} Let $a,b \in \mathbb{Z}$ and $m_1,m_2,...,m_k \in \mathbb{Z}^{+}$. If and only if
+\begin{center}
+\begin{array}{lcl}
+    a&\equiv&b \pmod {m_1} \\
+    a&\equiv&b \pmod {m_2} \\
+    &\vdots&\\
+    a&\equiv&b \pmod {m_k}, \\
+\end{array}
+\end{center}
+ then $a \equiv b \pmod {lcm(m_1,m_2,...,m_k)}$, where $lcm := $ least common multiple.
+\end{proposition}
+\noindent
+%\textit{Proof.} Since $m_i \; | \; (a-b) $ for each $i=1,2,...,k\;$, $lcm(m_1, m_2,..., m_k) \; | \; (a-b)$.\\
+%In other word, $a\equiv b \mod lcm(m_1, m_2,..., m_k)$.
+
+\begin{lemma} Let $m_1,m_2,...,m_k \in \mathbb{Z}^+$. We have
+\[\bigcap_{i=1}^kA_{m_i} = A_{lcm(m_1,m_2,...,m_k)}.\]
+\end{lemma} 
+\noindent
+\textit{Proof.} It is equivalent showing that \[x\in \bigcap_{i=1}^kA_{m_i} \iff x\in A_{lcm(m_1,m_2,...,m_k)}.\]
+$(\Rightarrow)$ Suppose that $x \in \bigcap_{i=1}^k A_{m_i}$. So we have
+\[1+p^a \equiv q^b+r^c \pmod {m_1}\]
+\[1+p^a \equiv q^b+r^c \pmod {m_2}\]
+\[\vdots\]
+\[1+p^a \equiv q^b+r^c \pmod {m_k}.\]
+By the above fact, $1+p^a \equiv q^b+r^c \pmod {lcm(m_1,m_2,...,m_k)}$. Thus $x \in A_{lcm(m_1,m_2,...,m_k)}$.\\
+$(\Leftarrow)$ Suppose that $x= (a,b,c) \in A_{lcm(m_1,m_2,...,m_k)}$. \\
+It follows that, for each $i=1,2,..,k$,
+\[m_i \; | \; lcm(m_1,m_2,...,m_k).\]
+And since
+\[1+p^a \equiv q^b +r^c \pmod {lcm(m_1,m_2,...,m_k)},\]
+for each $i=1,2,...,k$, 
+\[1+p^a \equiv q^b + r^c \pmod {m_i}\]
+Therefore, $x\in A_{m_1},A_{m_2},...,A_{m_k} $ which is $x \in \bigcap_{i=1}^kA_{m_i}$. $\square$ \\\\
+It seems that intersection of congruence solution sets can be represented as a single congruence solution set of least common multiple modulus which derive following lemma.
+\begin{lemma} Let $m_1,m_2,...,m_k$ be finite sequence of moduli used for modulo trick. We have
+\[S^{p,q,r}_k = A_m \]
+for some $m \in \mathbb{Z}^{+}$.
+\end{lemma}
+\noindent
+\textit{Proof.} By lemma 1, 
+\[S^{p,q,r}_k = \bigcap_{i=1}^k A_{m_i}.\]
+By lemma 2, \[\bigcap_{i=1}^k A_{m_i} = A_{lcm(m_1,.m_2,...m_k)} . \]
+Therefore, $S^{p,q,r}_k = A_m$, where $m=lcm(m_1,m_2,..,m_k)  \in \mathbb{Z}^{+}.\,\square$\\\\
+\hspace*{0.5cm} Now the modulo trick method, which may involve multiple moduli, can be represented as a congruence solution set of a single modulus, e.g., least common multiple modulus; it simplifies the modulo trick by saying that the whole method actually uses only one single modulus. We mainly use this lemma to prove the following important theorem.
+\begin{theorem} For fixed coprimes $p,q\in\mathbb{Z}^+$,
+    \[1+(pq)^a = p^b +q^c\]
+is non-solvable with modulo trick.
+\end{theorem}
+\noindent
+\textit{Proof.} By lemma 3, it is enough to show that for any $m\in \mathbb{Z}^{+}$, both of these conditions hold,
+\begin{itemize}
+    \item For each integer $M_a$, there exists $(a,b,c) \in A_m$ such that $a > M_a$.
+    \item For every pair of integers $M_b,M_c$, there exists $(a,b,c) \in A_m$ such that $b > M_b$ or $c > M_c$.
+\end{itemize}
+Since $p,q$ are coprime, we can partition the set of all primes $P$ to the sets $P_1,\;P_2,\;P_3$ satisfies,
+\[\forall x\in P_1, \; x\;|\; p\]
+\[\forall x\in P_2, \; x\;|\; q\]
+\[\forall x\in P_3, \; x\not\in P_1,P_2.\]
+Suppose that
+\[m = \prod_{i=1}^sx_i^{\alpha_i}\cdot \prod_{j=1}^ty_j^{\beta_j} \cdot \prod_{k=1}^uz_k^{\gamma_k} = \chi \cdot \Gamma\cdot \mathrm{Z}\,,\]
+where $\chi = \prod_{i=1}^sx_i^{\alpha_i}, \; \Gamma=\prod_{j=1}^ty_j^{\beta_j},\; \mathrm{Z} = \prod_{k=1}^uz_k^{\gamma_k}$,\\\\
+for some $x_i \in P_1,\;y_j \in P_2,\;z_k \in P_3$
+and $\alpha_i,\; \beta_j,\;\gamma_k \in \mathbb{Z}_{\geq0}$ for each $i=1,2,...,s; \\ \;j=1,2.,..,t; \; k=1,2,...,u$.\\
+Let $A = \max\{\alpha_1,\;\alpha_2,....,\;\alpha_s\},\; B = \max\{\beta_1,\;\beta_2,...,\;\beta_t\},\; C=\max\{\gamma_1,\;\gamma_2,...,\;\gamma_u\}.$\\
+Following the fact above lemma 2,
+\[1+(pq)^a \equiv p^b + q^c \pmod m\iff 
+\begin{cases}
+    1+(pq)^a \equiv p^b + q^c &\pmod \chi \\
+    1+(pq)^a \equiv p^b + q^c & \pmod \Gamma \\
+    1+(pq)^a \equiv p^b + q^c & \pmod{\mathrm{Z}} 
+\end{cases}
+\]
+Consider, for each $\theta_a,\theta_b,\theta_c \in \mathbb{Z}_{\geq 0}$, and $\phi(n)$ is Euler's totient function,
+\begin{center}
+\begin{cases}
+    1+(pq)^{\theta_a\cdot A\cdot B\cdot \phi(\mathrm{Z)}} \equiv  1 \equiv  p^{\theta_b\cdot A\cdot \phi(\Gamma) \cdot \phi(\mathrm{Z})}\; + \; q^{\theta_c \cdot B\cdot \phi(\chi)\cdot \phi(\mathrm{Z})} &\pmod \chi \\
+    1+(pq)^{\theta_a\cdot A\cdot B\cdot \phi(\mathrm{Z)}} \equiv  1 \equiv  p^{\theta_b\cdot A\cdot \phi(\Gamma) \cdot \phi(\mathrm{Z})}\; + \; q^{\theta_c \cdot B\cdot \phi(\chi)\cdot \phi(\mathrm{Z})} &\pmod \Gamma \\
+    1+(pq)^{\theta_a\cdot A\cdot B\cdot \phi(\mathrm{Z)}} \equiv  2 \equiv  p^{\theta_b\cdot A\cdot \phi(\Gamma) \cdot \phi(\mathrm{Z})}\; + \; q^{\theta_c \cdot B\cdot \phi(\chi)\cdot \phi(\mathrm{Z})} &\pmod{\mathrm{Z}}  \\
+\end{cases}
+\end{center}
+which is true by Euler's theorem. \\
+Therefore, $(\theta_a\cdot A\cdot B \cdot \phi(\mathrm{Z}), \; \theta_b\cdot A\cdot \phi (\Gamma)\cdot \phi(\mathrm{Z}) , \; \theta_c \cdot B\cdot \phi(\chi) \cdot \phi(\mathrm{Z})) \in A_m$ for every $\theta_a, \theta_b,  \theta_c \in \mathbb{Z}_{\geq 0}$\\
+In other words, for any $M_a,\;M_b,\;M_c \in \mathbb{Z}$, there exist \[(M_a\cdot A\cdot B \cdot \phi(\mathrm{Z}), \; M_b\cdot A\cdot \phi (\Gamma)\cdot \phi(\mathrm{Z}) , \; M_c \cdot B\cdot \phi(\chi) \cdot \phi(\mathrm{Z})) \in A_m \] 
+which satisfies both conditions of non-solvable with modulo trick. $\square$
+\\\\
+Theorem is generalized of the following corollary.
+\begin{corollary}
+ For fixed distinct primes $p,q$,
+    \[1+(pq)^a = p^b +q^c\]
+is non-solvable with modulo trick.
+\end{corollary}
+\noindent
+\hspace*{0.5cm}The corollary validates the \cite{eDe} Brenner and Foster's comment (8.037). As they said that the equation seems not amenable to their method.\\
+\hspace*{0.5cm}Consequently, we suggest to not primarily use the modulo trick to solve exponential Diophantine equations of the form $1+(pq)^a = p^b + q^c$, but instead to use Baker’s theory of linear forms in logarithms, as implemented by Wang and R. Tijdeman \cite{wang}.
+\newpage
+\subsection*{Generalization}
+ \hspace*{0.5cm} Prior proposition and most lemmas is only capable for only one equation \eqref{main}. We also want to generalize them for more various forms of equation. These generalization lead us to another important result, i.e., theorem 2. \\
+ \hspace*{0.5cm}Let $n,m \in \mathbb{Z}^{+}$, and $C_1, C_2 \in \mathbb{Z}_{\geq 0} $ and $ k_i, a_i, l_j, b_j \in \mathbb{Z}^{+}\; (i=1,2,..,n ;\;j=1,2,...,m)$.\\
+ Consider exponential Diophantine equation
+\begin{equation}
+    C_1+ \sum_{i=1}^nk_ia_i^{x_i} = C_2 + \sum_{i=1}^ml_ib_i^{y_i} \label{general}
+\end{equation}
+where $x_1,x_2,..,x_n,y_1,y_2,..,y_m \in \mathbb{Z}_{\geq 0}$.\\
+\begin{lemma} Equation \eqref{general} is computable if at least one of these conditions hold : 
+\begin{enumerate}
+    \item There exist positive integer $M$ such that $x_1,x_2,...,x_n \leq M.$ 
+    \item There exist positive integer $M$ such that 
+    $y_1,y_2,...,y_m \leq M.$
+\end{enumerate}
+
+\end{lemma}
+\noindent
+\textit{Proof.}\\
+(Condition 1) : Suppose that there exist positive integer $M$ such that $x_1, x_2,...x_n \leq M$\\
+So, for each $j=1,2,...,m$, we have,
+\begin{center}
+\begin{array}{rll}
+    C_2+\sum_{i=1}^ml_ib_i^{y_i} &=& C_1 + \sum_{i=1}^nk_ia_i^{x_i}\\
+    C_2 + l_jb_j^{y_j} + \sum_{i=1,i\neq j}^ml_ib_i^{y_i} &=& C_1 + \sum_{i=1}^nk_ia_i^{x_i}\\
+    l_jb_j^{y_j} &=& C_1 +  \sum_{i=1}^nk_ia_i^{x_i} -  \sum_{i=1,i\neq j}^ml_ib_i^{y_i} - C_2 \\
+    b_j^{y_j} &=& \dfrac{C_1 +  \sum_{i=1}^nk_ia_i^{x_i} -  (\sum_{i=1,i\neq j}^ml_ib_i^{y_i} + C_2)}{l_j} \\
+    b_j^{y_j} &\leq& \dfrac{C_1 + \sum_{i=1}^nk_ia_i^{x_i}}{l_j} \;\; ;\;\sum_{i=1,i\neq j}^m l_ib_i^{y_i}, \;C_2 \geq 0  \\
+    b_j^{y_j} &<&  \dfrac{C_1 + \sum_{i=1}^nk_ia_i^{M}}{l_i} \;\; ;\; x_1,x_2,...,x_n < M\\
+    y_j &<& \log(\dfrac{C_1 + \sum_{i=1}^nk_ia_i^{M}}{l_i})\cdot\dfrac{1}{\log b_j}\\
+    &\leq&D_j
+\end{array}
+\end{center}
+for some $D_j\in \mathbb{Z}^{+}$. \\
+Consequently, $y_1,y_2,..,y_m \leq \max \{D_1, D_2, ..., D_m\} =L$. 
+It follows that any solutions of \eqref{general} belong to the set $\{(x_1,x_2,..,x_n,y_1,y_2,...,y_m) \in \mathbb{Z}_{\geq0}^{n+m}\; | \; x_i \leq M, \; y_j \leq L \}$. Since the set is finite, every element in it can be checked whether it is a solution or not in finite time and this equation is computable.\\
+\\
+(Condition 2) : Prove in the same way as condition 1. $\square$\\
+\\
+\hspace*{0.5cm}The prior definitions leads us to more straightforward general definitions. \\
+Let $m_1,m_2,...,m_k$ be the sequence of moduli used for the modulo trick. We define
+\[S_0 = \mathbb{Z}_{\geq 0}^{n+m}, \; \text{and for each} \; j=1,2,..., k \;,\]
+\[S_i = \{(x_1, x_2,..., x_n, y_1, y_2,..., y_m) \in S_{i-1} \;| \;  C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod {m_j} \}.\]
+\\
+\textbf{Definition} : The exponential Diophantine equation of the form \eqref{general} are called ``solvable with modulo trick" if there exists finite sequence of moduli $m_1, m_2,..., m_k \in \mathbb{Z}^{+}$ used for modulo trick which one of these conditions hold,
+\begin{itemize}
+    \item There exist integer $M$ such that $M \geq x_1, x_2,..., x_n$ for any $(x_1, x_2,..., x_n, y_1, y_2,... y_m) \in S_k$.
+    \item There exist integer $M$ such that $M \geq  y_1, y_2,...,y_m $ for any $(x_1, x_2,..., x_n, y_1, y_2,... y_m) \in S_k$.
+\end{itemize} 
+
+\textbf{Definition} : The exponential Diophantine equation of the form \eqref{general} are called ``non-solvable with modulo trick" if for each finite sequence of moduli $m_1, m_2,...,m_k \in \mathbb{Z}^{+}$ are used for modulo trick which for each $N,M \in \mathbb{Z}^{+}$, the following conditions hold,
+\begin{itemize}
+    \item There exist $(x_1, x_2,...,x_n,y_1,y_2,...,y_m) \in S_k$ such that $N < x_i$ for some $i=1,2,...,n$.
+    \item There exist $(x_1,x_2,..,x_n,y_1,y_2,...,y_m) \in S_k$ such that $M < y_i$ for some $i=1,2,...,m$.
+\end{itemize}\\
+\textbf{Notation} : $A'_m  = \{(x_1,x_2,...,x_n,y_1,y_2,...,y_m) \in \mathbb{Z}_{\geq 0}^{m+n} \;|\; C_1+ \sum_{i=1}^nk_ia_i^{x_i} = C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod m\} $ \\
+
+\hspace{0.5cm}Since we give the definition and notation of $S_i$ and $A'_m$ in the same way as the $S_i^{p,q,r}$ and $A_m$. So we can easily derive the following lemmas and corollary.
+
+\begin{lemma} Let $m_1,m_2,...,m_k\in \mathbb{Z}^+$ be sequence of moduli used for modulo trick. We have
+    \[S_k = \bigcap_{i=1}^k A'_{m_i}.\]
+\end{lemma}
+\noindent
+\textit{Proof.} It is equivalent to show that \[x\in S_k \iff x \in \bigcap_{i=1}^kA'_{m_i}.\] \\
+$(\Rightarrow)$ Suppose that $x = (x_1,x_2,..,x_n,y_1,y_2,...,y_m)\in S_k$. By definition, $S^{p,q,r}_i \subseteq S^{p,q,r}_{i-1}$ for $i>0$, then $x \in S_{k-1}, S_{k-2},...,S_0$. Thus,
+\[    C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod {m_k}\]
+\[    C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod {m_{k-1}}\]
+\[\vdots\]
+\[    C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod {m_{1}}.\]
+Since $x\in S_0 = \mathbb{Z}_{\geq0}^{m+n}$, it implies that $x\in A'_{m_i} $ for each $i=1,2,...,k$. Therefore, $x\in \bigcap_{i=1}^kA'_{m_i}$.\\
+$(\Leftarrow)$ Suppose $x \in \bigcap_{i=1}^k A'_{m_i}$. Observe that for each $i=0,1,...,k-1$,
+\[ x\in A'_{m_{i+1}}\; \text{and} \; x\in S_{i} \iff  x \in S_{i+1}.\]
+Since $x\in A'_{m_i} $ for any $i=1,2,...,k$,
+\[x\in  \mathbb{Z}^{m+n}_{\geq0} = S_0 \iff x\in S_{1} \iff ....\iff x\in S_{k-1} \iff  x \in  S_{k}. \, \square \]
+\newpage
+\begin{lemma} Let $m_1,m_2,...,m_k \in \mathbb{Z}^+$. We have
+\[\bigcap_{i=1}^kA'_{m_i} = A'_{lcm(m_1,m_2,...,m_k)}.\]
+\end{lemma} 
+\noindent
+\textit{Proof.} It is equivalent to show that \[x\in \bigcap_{i=1}^kA'_{m_i} \iff x\in A'_{lcm(m_1,m_2,...,m_k)}.\]
+$(\Rightarrow)$ Suppose that $x \in \bigcap_{i=1}^k A'_{m_i}$. So we have
+\[    C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod {m_k}\]
+\[    C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod {m_{k-1}}\]
+\[\vdots\]
+\[    C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod {m_{1}}.\]
+By the fact above lemma 2, 
+\[    C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod {lcm(m_1,m_2,...,m_k}).\]
+Therefore, $x \in A'_{lcm(m_1,m_2,...,m_k)}$.\\
+$(\Leftarrow)$ Suppose that $x= (x_1,x_2,...,x_n,y_1,y_2,...,y_m) \in A'_{lcm(m_1,m_2,...,m_k)}$. \\
+It follows that, for each $i=1,2,..,k$,
+\[m_i \; | \; lcm(m_1,m_2,...,m_k).\]
+Since
+\[    C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i}\pmod {lcm(m_1,m_2,...,m_k}),\]
+for each $j=1,2,...,k$, 
+\[    C_1+ \sum_{i=1}^nk_ia_i^{x_i} \equiv C_2 + \sum_{i=1}^ml_ib_i^{y_i} \pmod {m_j}.\]
+Therefore, $x\in A'_{m_1},A'_{m_2},...,A'_{m_k} $ which is $x \in \bigcap_{i=1}^kA'_{m_i}$. $\square$
+\begin{lemma} Let $m_1,m_2,...,m_k$ be finite sequence of moduli for modulo trick. We have
+\[S_k = A'_m \]
+for some $m \in \mathbb{Z}^{+}$.
+\end{lemma}
+\noindent
+\textit{Proof.} By lemma 5, 
+\[S_k = \bigcap_{i=1}^k A'_{m_i}.\]
+By lemma 6, \[\bigcap_{i=1}^k A'_{m_i} = A'_{lcm(m_1,.m_2,...m_k)} . \]
+Therefore, $S_k = A'_m$, where $m=lcm(m_1,m_2,..,m_k)  \in \mathbb{Z}^{+}. \, \square$\\\\
+\hspace*{0.5cm}Now, we introduce the lemma which leads us to another important theorem.
+\begin{lemma}
+    Let $a,n$ be positive integer. Then the sequence $(a^x \mod n )_{x=1}^\infty$ is eventually periodic.\\
+    In other words, there exist non-negative integers $k,\; \epsilon$ such that 
+    \[a^x \equiv a^{x+\epsilon} \pmod n\]
+    for all $x\geq k$.
+\end{lemma}
+\noindent
+\textit{Proof.} Since, for any positive integer $x$, we have $a^x \mod n \in \{0,1,2,..,n-1\}$, which is finite. \\
+Therefore by pigeonhole principle, there exist $i,\epsilon \in \mathbb{Z}_{\geq0}$ satisfy
+\[a^i \equiv a^{i+\epsilon} \pmod n \hspace{0.3cm}-(i).\]
+Since $x \equiv y \pmod n$, $cx \equiv cy \pmod n$ for any integer $c$. \\
+For each non-negative integer $t$, we multiply $a^t$ to both side of $(i)$, which yields that 
+\[a^{i+t} \equiv a^{i+t+\epsilon} \pmod n.\]
+By replacing $i+t$ with $x$, we conclude that
+\[a^x \equiv a^{x+\epsilon} \pmod n\]
+for any $x \geq i$.\\\\
+\hspace*{0.5cm}Above lemma shows that for any modulo, exponent of any base will grow until its residue becomes period or pattern, for example, $3^a \mod 9$ equals to 3 when $a<2$, then it repeatedly equals $0$ after $a\geq2$. We mainly use lemma 8 to prove the following theorem.
+\begin{theorem}
+Let $a,b \in \mathbb{Z}^+$. The exponential Diophantine equation
+    \[a^x-a^y = b^z-b^w \]
+    is non-solvable with modulo trick.
+\end{theorem}
+\noindent
+\textit{Proof}. By the fact above lemma 2, it enough to show that for each $d,M,N \in \mathbb{Z}_{\geq 0}$,
+\begin{enumerate}
+    \item There exist $(x,y,z,w) \in A'_d$ such that $x > N$ or $y > N$.
+    \item There exist $(x,y,z,w) \in A'_d$ such that $z > M$ or $w > M$.
+\end{enumerate}
+By lemma 8, there exist $k_a,\;k_b,\;\epsilon_a,\;\epsilon_b \in \mathbb{Z}_{\geq 0 }$ such that,
+\[a^x \equiv a^{x+\epsilon_a} \equiv a^{x+t\cdot\epsilon_a}\pmod d \]
+\[b^y \equiv b^{y+\epsilon_b} \equiv b^{y+s\cdot\epsilon_b}\pmod d\]
+for any $x\geq k_a, \;y\geq k_b$ and $t,s \in \mathbb{Z}^+$. Therefore,
+\[(x,\;x+M\cdot\epsilon_a,\;y,\;y+N\cdot\epsilon_b) \in A'_d \;\; \forall x\geq k_a,\; y\geq k_b. \] 
+Since $x+N\epsilon_a > N$ and $y+M\epsilon_b > M $, there exist $(x,y,z,w)$ which satisfy both conditions. \\\\
+Theorem is generalized of the following corollary.
+\begin{corollary}
+ For fixed distinct primes $p,q$. The exponential Diophantine equation
+    \[p^x-p^y = q^z-q^w \]
+is non-solvable with modulo trick.
+\end{corollary}
+\noindent
+\hspace*{0.5cm}The corollary validates the \cite{eDe} Brenner and Foster's comment (8.033). As they said that all solution of this equation cannot be fully investigated by reducing it to congruence $p^x-p^y = q^z-q^w \pmod {m_i}$.\\
+\hspace*{0.5cm}Finally, we suggest to not primarily use modulo trick to solve exponential Diophantine equations of the form $a^x-a^y = b^z-b^w$, but instead to use Baker’s theory of linear forms in logarithms, as implemented by Mo Deze and Tijdeman \cite{DEZE199247}.
+\\\\
+\hspace*{0.5cm}In summary, the generalized definitions and the method to prove non-solvable with modulo trick could be potentially a method that applies to other forms of exponential Diophantine equations for further work. On the other hand, we haven't found any non-trivial exponential Diophantine equations in general form that could be proven that satisfy solvable with modulo trick conditions.
+\newpage
+
+\begin{center}
+    \section*{Chapter 5}
+    \section*{Conclusion}
+    \addcontentsline{toc}{section}{Chapter 5: Conclusion}
+\end{center}
+\hspace{0.5cm} We have given two theorems and two corollaries affirming Brenner and Foster’s comments validates the \cite{eDe} that the following equations seem not to be amenable to their method (modulo trick).  \\\\
+\textbf{Theorem 1.}  \textit{For fixed coprimes $p,q\in\mathbb{Z}^+$. The exponential Diophantine equation}
+    \[1+(pq)^a = p^b +q^c\]
+\textit{is non-solvable with modulo trick.} \\\\
+Corollary as Brenner and Foster’s comment (8.037). \\\\
+\textbf{Corollary 1.}  \textit{For fixed distinct primes $p,q$. The exponential Diophantine equation}
+    \[1+(pq)^a = p^b +q^c\]
+\textit{is non-solvable with modulo trick.} \\\\
+\textbf{Theorem 2.}  \textit{Let $a,b \in \mathbb{Z}_{\geq 0}$. The exponential Diophantine equation,}
+    \[a^x-a^y = b^z-b^w \]
+    \textit{is non-solvable with modulo trick.} \\\\
+Corollary as Brenner and Foster’s comment (8.033). \\\\
+\textbf{Corollary 2.}  \textit{For fixed distinct primes $p,q$. The exponential Diophantine equation}
+    \[p^x-p^y = q^z-q^w \]
+\textit{is non-solvable with modulo trick.}
+
+ %\hspace*{0.5cm}Let $n,m \in \mathbb{Z}^{+}$, and $C_1, C_2 \in \mathbb{Z}_{\geq 0} $ and $ k_i, a_i, l_j, b_j \in \mathbb{Z}^{+}\; (i=1,2,..,n ;\;j=1,2,...,m)$.\\
+ %Consider exponential Diophantine equation,
+%\[
+    %C_1+ \sum_{i=1}^nk_ia_i^{x_i} = C_2 + \sum_{i=1}^ml_ib_i^{y_i}
+%\]
+%where $x_1,x_2,..,x_n,y_1,y_2,..,y_m \in \mathbb{Z}_{\geq 0}$.\\
+%For each finite sequence of moduli $m_1, m_2,...,m_k \in \mathbb{Z}^{+}$ are used for modulo trick which for each $N,M \in \mathbb{Z}^{+}$, the following conditions hold,
+%\begin{itemize}
+    %\item There exist $(x_1, x_2,...,x_n,y_1,y_2,...,y_m) \in S_k$ such that $x_i \geq N$ for some $i=1,2,...,n$.
+    %\item There exist $(x_1,x_2,..,x_n,y_1,y_2,...,y_m) \in S_k$ such that $y_i \geq M$ for some $i=1,2,...,m$.
+%\end{itemize}\\
+%where $S_0 = \mathbb{Z}_{\geq 0}^{n+m},\;\text{and} \;$$S_i = \{(x_1, x_2,..., x_n, y_1, y_2,..., y_m) \in S_{i-1} \;| \;  C_1+ \sum_{i=1}^nk_ia_i^{x_i} = C_2 + \sum_{i=1}^ml_ib_i^{y_i} \mod m_i \} \text{ for each} \; i=1,2,..., k. \;$
+
+\newpage
+\begin{comment}\begin{center}
+    \section*{Appendixes}
+    \addcontentsline{toc}{section}{Appendixes}
+\end{center}
+
+\subsection*{Appendix A}
+Solving the exponential Diophantine equation $1+5^a = 7^b +7^c$.\\
+\textit{Solution. }First, consider,
+\[1+5^a = 7^b + 7^c \implies 1+5^a \equiv 0 \mod 7\]
+Hence, $a \equiv 3 \mod 6$ and $a$ is odd. Then consider, 
+\[1+5^a = 7^b + 7^c \implies 1+5^a \equiv 7^b+7^c \mod 3\]
+Since $a$ is odd, $b,c = 0$.\\
+By proposition 1, in each cases all solutions are ascertainable.
+\end{comment}
+
+\newpage
+\begin{center}
+    \section*{References}
+    \addcontentsline{toc}{section}{References}
+\end{center}
+\bibliographystyle{ieeetr}
+\bibliography{refs}
+
+\end{document}

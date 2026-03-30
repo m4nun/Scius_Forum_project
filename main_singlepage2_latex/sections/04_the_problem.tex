@@ -1,0 +1,23 @@
+% ================================================================================
+% Section 4: The Problem - Equations That Resist the Modulo Trick
+% ================================================================================
+\section{The Problem}
+
+\begin{frame}{Why Do Some Equations Resist?}
+    \begin{itemize}
+        \item In our successful example $1+5^a = 7^b+7^c$, we found:
+        \begin{itemize}
+            \item Modulo 7 forced a condition on $a$
+            \item Modulo 9 forced a contradiction unless $b$ or $c$ was small
+        \end{itemize}
+
+        \item For $1+(pq)^a = p^b+q^c$, something different happens:
+        \begin{itemize}
+            \item Modulo $p$: $1 \equiv 0 + q^c \pmod p$ gives condition on $c$
+            \item Modulo $q$: $1 \equiv p^b + 0 \pmod q$ gives condition on $b$
+            \item But these conditions don't create contradictions - they actually allow arbitrarily large solutions!
+        \end{itemize}
+
+        \item This suggests something fundamental: some equations are inherently immune to the modulo trick.
+    \end{itemize}
+\end{frame}

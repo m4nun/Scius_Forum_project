@@ -1,0 +1,324 @@
+% ================================================================================
+% Section 6: Results
+% ================================================================================
+\section{Results}
+
+\subsection{Foundational Results}
+
+\begin{frame}{Proposition 1 - Key Insight for Computability}
+    \begin{proposition}
+       Equation $1+p^a = q^b + r^c$ is computable if at least one of these conditions holds:
+       \begin{enumerate}
+           \item There exists $M$ such that $a \leq M$ for any solution $(a,b,c)$
+           \item There exist $M_b, M_c$ such that $b \leq M_b$ and $c \leq M_c$ for any solution
+       \end{enumerate}
+    \end{proposition}
+
+    \textbf{Proof sketch (Condition 1):}
+    \begin{align*}
+        q^b+r^c &= 1+p^a \\
+        q^b &= 1+p^a - r^c \leq p^a \leq p^M \\
+        \implies b &\leq \frac{M\ln p}{\ln q},\quad c \leq \frac{M\ln p}{\ln r}
+    \end{align*}
+
+    \textbf{Conclusion:} All solutions lie in a finite set, hence computable in finite time.
+\end{frame}
+
+\begin{frame}{Modeling the Modulo Trick with Sets}
+    \begin{block}{What happens when we apply the modulo trick?}
+        \begin{itemize}
+            \item We start with \textbf{all possible} exponent triples $(a,b,c)$
+            \item We choose a modulus $m_1$ and impose: $1+p^a \equiv q^b+r^c \pmod{m_1}$
+            \item This eliminates triples that don't satisfy this congruence
+            \item We repeat with $m_2, m_3, ...$ - each time further restricting the possibilities
+        \end{itemize}
+    \end{block}
+
+    \vspace{0.3cm}
+    \textbf{We can represent this mathematically:}
+    \begin{align*}
+        S_0^{p,q,r} &= \mathbb{Z}_{\geq 0}^3 \quad \text{(all possibilities)} \\
+        S_1^{p,q,r} &= \{(a,b,c) \in S_0^{p,q,r} \; | \; 1+p^a \equiv q^b+r^c \pmod{m_1}\} \\
+        S_2^{p,q,r} &= \{(a,b,c) \in S_1^{p,q,r} \; | \; 1+p^a \equiv q^b+r^c \pmod{m_2}\} \\
+        &\vdots \\
+        S_k^{p,q,r} &= \{(a,b,c) \in S_{k-1}^{p,q,r} \; | \; 1+p^a \equiv q^b+r^c \pmod{m_k}\}
+    \end{align*}
+\end{frame}
+
+\begin{frame}{From Sets to Definition of Solvability}
+    \begin{block}{Key observation}
+        After applying all moduli $m_1,...,m_k$, the set $S_k^{p,q,r}$ contains \textbf{all potential solutions} that survive all congruence conditions.
+    \end{block}
+
+    \vspace{0.2cm}
+    \textbf{Recall Proposition 1:} If we can bound $a$ (or bound both $b$ and $c$), then all variables are bounded and the equation becomes computable by brute force.
+
+    \vspace{0.3cm}
+    \textbf{Therefore, the modulo trick succeeds exactly when:}
+    \begin{itemize}
+        \item After some finite sequence of moduli, the set $S_k^{p,q,r}$ contains only triples where:
+        \begin{enumerate}
+            \item $a$ is bounded by some $M_a$, OR
+            \item both $b$ and $c$ are bounded by some $M_b, M_c$ respectively
+        \end{enumerate}
+    \end{itemize}
+
+    \vspace{0.2cm}
+    This is precisely our definition of \textbf{solvable with modulo trick} - it directly captures what the method aims to achieve!
+\end{frame}
+
+\begin{frame}{Formal Definition of Modulo Trick Solvability}
+    Let $m_1,m_2,...,m_k$ be the sequence of moduli used. Define:
+    \[S_0^{p,q,r} = \mathbb{Z}_{\geq 0}^3\]
+    \[S_i^{p,q,r} = \{(a,b,c)\in S_{i-1}^{p,q,r} \; | \; 1+p^a \equiv q^b+r^c \pmod{m_i}\}\]
+
+    \begin{Definitionn}
+        Equation \eqref{general} is \textbf{solvable with modulo trick} if $\exists$ finite moduli $m_1,...,m_k$ such that:
+        \begin{itemize}
+            \item $\exists M_a$ with $M_a \geq a$ for all $(a,b,c) \in S_k^{p,q,r}$, OR
+            \item $\exists M_b,M_c$ with $M_b \geq b$ and $M_c \geq c$ for all $(a,b,c) \in S_k^{p,q,r}$
+        \end{itemize}
+    \end{Definitionn}
+
+    \begin{Definitionn}
+        Equation \eqref{general} is \textbf{non-solvable with modulo trick} if for any finite moduli $m_1,...,m_k$:
+        \begin{itemize}
+            \item $\forall M_a$, $\exists (a,b,c) \in S_k^{p,q,r}$ with $a > M_a$
+            \item $\forall M_b,M_c$, $\exists (a,b,c) \in S_k^{p,q,r}$ with $b > M_b$ or $c > M_c$
+        \end{itemize}
+    \end{Definitionn}
+\end{frame}
+
+\begin{frame}{Key Lemma - Single modulus lemma}
+    \begin{lemmas}
+        Let $A_m = \{(a,b,c) \in \mathbb{Z}_{\geq 0}^3 \; | \; 1+p^a \equiv q^b+r^c \pmod{m}\}$.
+        For any moduli $m_1,...,m_k$,
+        \[S_k^{p,q,r} = \bigcap_{i=1}^k A_{m_i} = A_{\operatorname{lcm}(m_1,...,m_k)}\]
+    \end{lemmas}
+
+    \textbf{Significance:}
+    \begin{itemize}
+        \item Any sequence of modular restrictions reduces to a \textbf{single modulus} (the LCM)
+        \item Simplifies analysis dramatically
+        \item Allows us to prove non-solvability by considering arbitrary single modulus
+    \end{itemize}
+\end{frame}
+
+\subsection{Main Theorems}
+
+\begin{frame}{Theorem 1 - Non-solvability of $1+(pq)^a = p^b + q^c$}
+    \begin{theorems}
+        For fixed coprime positive integers $p,q$, the equation
+        \[1+(pq)^a = p^b + q^c\]
+        is non-solvable with modulo trick.
+    \end{theorems}
+
+    \textbf{Proof strategy:}
+    \begin{enumerate}
+        \item By Lemma 3, it suffices to show for \textbf{any} modulus $m$, $A_m$ contains arbitrarily large $a,b,c$
+        \item Factor $m = \chi \cdot \Gamma \cdot \mathrm{Z}$ where:
+            \begin{itemize}
+                \item $\chi$ contains primes dividing $p$
+                \item $\Gamma$ contains primes dividing $q$
+                \item $\mathrm{Z}$ contains primes dividing neither
+            \end{itemize}
+        \item Construct solutions using Euler's theorem
+        \item Parameters can be arbitrarily large $\implies$ non-solvable
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Corollary 1 - Validating Brenner and Foster (8.037)}
+    \begin{corollarys}
+        For fixed distinct primes $p,q$, the equation
+        \[1+(pq)^a = p^b + q^c\]
+        is non-solvable with modulo trick.
+    \end{corollarys}
+
+    \vspace{0.3cm}
+    \textbf{Significance:}
+    \begin{itemize}
+        \item This is exactly the case mentioned by Brenner and Foster
+        \item They observed it "seems not amenable" to congruence methods
+        \item We have now \textbf{proved} this observation rigorously
+        \item Provides mathematical validation for their heuristic comment
+    \end{itemize}
+\end{frame}
+
+\subsection{Generalization}
+
+\begin{frame}{Moving Beyond the Specific Form}
+    \begin{block}{So far we've focused on:}
+        \[1+p^a = q^b + r^c\]
+    \end{block}
+
+    \begin{itemize}
+        \item This is just ONE type of exponential Diophantine equation
+        \item We want to analyze other forms like:
+        \begin{align*}
+            &p^x - p^y = q^z - q^w \quad \text{(Brenner \& Foster 8.033)}\\
+            &(pq)^a - p^b - q^c + 1 = 0 \quad \text{(Brenner \& Foster 8.037)}
+        \end{align*}
+
+        \item \textbf{Significance:} To prove non-solvability for these cases, we need definitions that work for ANY exponential Diophantine equation
+
+        \item \textbf{Generalization strategy:} Extend our framework to handle equations of the form:
+        \[C_1 + \sum_{i=1}^n k_i a_i^{x_i} = C_2 + \sum_{j=1}^m l_j b_j^{y_j}\]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{General Form of Exponential Diophantine Equation}
+    \begin{definition}[General Form]
+        Let $n,m \in \mathbb{Z}^{+}$, and $C_1, C_2 \in \mathbb{Z}_{\geq 0}$ and $k_i, a_i, l_j, b_j \in \mathbb{Z}^{+}$ for $i=1,2,..,n$ and $j=1,2,...,m$.
+
+        Consider the exponential Diophantine equation
+        \begin{equation}
+            C_1 + \sum_{i=1}^n k_i a_i^{x_i} = C_2 + \sum_{j=1}^m l_j b_j^{y_j} \label{general}
+        \end{equation}
+        where $x_1,x_2,..,x_n, y_1,y_2,..,y_m \in \mathbb{Z}_{\geq 0}$.
+    \end{definition}
+
+    \textbf{Examples rewritten in this form:}
+    \begin{itemize}
+        \item $1 + 5^a = 7^b + 7^c$
+        \item $p^x - p^y = q^z - q^w$
+    \end{itemize}
+
+    \textbf{Significance:} This notation lets us analyze different exponential Diophantine equations with one common framework.
+\end{frame}
+
+\begin{frame}{Generalized Computability Criterion}
+    \begin{lemma}[General Computability]
+        Equation \eqref{general} is computable if at least one of these conditions hold:
+        \begin{enumerate}
+            \item There exist positive integer $M$ such that $x_1, x_2, ..., x_n \leq M$ for any solution.
+            \item There exist positive integer $M$ such that $y_1, y_2, ..., y_m \leq M$ for any solution.
+        \end{enumerate}
+    \end{lemma}
+
+    \textbf{Significance of this lemma:}
+    \begin{itemize}
+        \item This generalizes Proposition 1 from our specific equation to ANY equation of form \eqref{general}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Generalized Solution Sets After Moduli}
+    \begin{definition}[Solution Sets]
+        Let $m_1, m_2, ..., m_k$ be the sequence of moduli used for the modulo trick. We define:
+
+        \[S_0 = \mathbb{Z}_{\geq 0}^{n+m}\]
+
+        and for each $j = 1,2,...,k$:
+
+        \[S_j = \left\{(x_1, x_2,..., x_n, y_1, y_2,..., y_m) \in S_{j-1}
+        \;\middle|\; C_1 + \sum_{i=1}^n k_i a_i^{x_i} \equiv C_2 + \sum_{i=1}^m l_i b_i^{y_i} \pmod{m_j} \right\}\]
+    \end{definition}
+
+    \textbf{Notation:} For any modulus $k$, define the congruence solution set:
+
+    \[A'_k = \left\{(x_1,...,x_n,y_1,...,y_m) \in \mathbb{Z}_{\geq 0}^{n+m}  \; |  \; C_1 + \sum_{i=1}^n k_i a_i^{x_i} \equiv C_2 + \sum_{i=1}^m l_i b_i^{y_i} \pmod{k} \right\}\]
+
+    \textbf{Significance:} $S_k$ represents all tuples that survive all congruence conditions after applying the modulo trick. Any true solution to the original equation must be contained in $S_k$.
+\end{frame}
+
+\begin{frame}{General Definition of Solvability with Modulo Trick}
+    \begin{definition}[General Solvability]
+        The exponential Diophantine equation of the form \eqref{general} is called \textbf{solvable with modulo trick} if there exists a finite sequence of moduli $m_1, m_2, ..., m_k \in \mathbb{Z}^{+}$ used for modulo trick such that one of these conditions holds:
+
+        \begin{itemize}
+            \item There exists an integer $M$ such that $M \geq x_1, x_2, ..., x_n$ for any $(x_1, x_2, ..., x_n, y_1, y_2, ..., y_m) \in S_k$.
+
+            \item There exists an integer $M$ such that $M \geq y_1, y_2, ..., y_m$ for any $(x_1, x_2, ..., x_n, y_1, y_2, ..., y_m) \in S_k$.
+        \end{itemize}
+    \end{definition}
+
+    \textbf{Significance of this definition:}
+    \begin{itemize}
+        \item Captures exactly what the modulo trick aims to achieve - bounding one side of the equation
+        \item Therefore, only finitely many tuples remain to check - the equation becomes computable!
+        \item This definition works for ANY equation of form \eqref{general}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{General Definition of Non-solvability with Modulo Trick}
+    \begin{definition}[General Non-solvability]
+        The exponential Diophantine equation of the form \eqref{general} is called \textbf{non-solvable with modulo trick} if for each finite sequence of moduli $m_1, m_2, ..., m_k \in \mathbb{Z}^{+}$ used for modulo trick, the following conditions hold for every $N, M \in \mathbb{Z}^{+}$:
+
+        \begin{itemize}
+            \item There exists $(x_1, x_2, ..., x_n, y_1, y_2, ..., y_m) \in S_k$ such that $N < x_i$ for some $i = 1,2,...,n$.
+
+            \item There exists $(x_1, x_2, ..., x_n, y_1, y_2, ..., y_m) \in S_k$ such that $M < y_i$ for some $i = 1,2,...,m$.
+        \end{itemize}
+    \end{definition}
+
+    \textbf{Significance of this definition:}
+    \begin{itemize}
+        \item No matter which moduli we choose, we cannot force either side of the equation to be bounded
+        \item This formalizes what Brenner and Foster meant by "not amenable" to their method
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Key Lemma - Generalized Single modulus lemma}
+    \begin{lemmas}
+        For any moduli $m_1,...,m_k$,
+        \[S_k = \bigcap_{i=1}^k A'_{m_i} = A'_{\operatorname{lcm}(m_1,...,m_k)}\]
+    \end{lemmas}
+
+    \textbf{Significance:}
+    \begin{itemize}
+        \item Generalized of lemma 1
+        \item Any sequence of modular restrictions reduces to a \textbf{single modulus} (the LCM)
+        \item Allows us to prove non-solvability by considering arbitrary single modulus
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Lemma 3 - Period of Exponent Residues}
+    \begin{lemmas}
+        Let $a,n$ be positive integers. The sequence $(a^x \bmod n)_{x=1}^\infty$ is eventually periodic.
+
+        That is, $\exists$ non-negative integers $k,\epsilon$ such that
+        \[a^x \equiv a^{x+\epsilon} \pmod n\]
+        for all $x \geq k$.
+    \end{lemmas}
+
+    \textbf{Proof sketch:}
+    \begin{itemize}
+        \item Residues are in $\{0,1,...,n-1\}$ (finite set)
+        \item By pigeonhole principle, some residue repeats: $a^i \equiv a^{i+\epsilon}$
+        \item Multiply by $a^t$ to extend periodicity
+        \item \textbf{Key insight:} Exponents can grow while maintaining congruence patterns
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Theorem 2 - Non-solvability of $a^x-a^y = b^z-b^w$}
+    \begin{theorems}
+        Let $a,b \in \mathbb{Z}^+$. The exponential Diophantine equation
+        \[a^x - a^y = b^z - b^w\]
+        is non-solvable with modulo trick.
+    \end{theorems}
+
+    \textbf{Proof sketch:}
+    \begin{enumerate}
+        \item For any modulus $d$, by Lemma 3, $\exists$ periods $\epsilon_a,\epsilon_b$ and starting points $k_a,k_b$
+        \item For any $x \geq k_a$, $y \geq k_b$,
+            \[(x,\; x+N\epsilon_a,\; y,\; y+M\epsilon_b) \in A'_d\]
+        \item$x+N\epsilon_a,\;y+M\epsilon_b $ are increasing for any positive integer $N,M$
+        \item Thus arbitrarily large exponents exist in $A'_d$ for any $d$
+        \item Therefore non-solvable by modulo trick
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Corollary 2 - Validating Brenner and Foster (8.033)}
+    \begin{corollarys}
+        For fixed distinct primes $p,q$, the equation
+        \[p^x - p^y = q^z - q^w\]
+        is non-solvable with modulo trick.
+    \end{corollarys}
+
+    \vspace{0.3cm}
+    \textbf{Significance:}
+    \begin{itemize}
+        \item Validates Brenner and Foster's comment (8.033)
+        \item They noted this equation "cannot be fully investigated by reducing it to congruences"
+        \item Our proof shows why: residues become periodic, allowing arbitrarily large solutions to satisfy any congruence
+    \end{itemize}
+\end{frame}
