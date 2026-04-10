@@ -1,0 +1,13 @@
+# Fdb version 4
+["pdflatex"] 1775791659.39955 "main.tex" "build/main.pdf" "main" 1775791659.60991 2
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1770681600 40900 887e0dc8cac988a9e9c574af364cf837 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1775145689 6444214 d040ea2a8c6a2a829b07ae3c76a2444a ""
+  "beamer.cls" 0 -1 0 ""
+  "build/beamer.cls" 0 -1 0 ""
+  "build/main.aux" 1775791651.39774 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "main.tex" 1775750216.99933 3205 a9c7f9d99716f06caee62d4ccfba8529 ""
+  (generated)
+  "build/main.aux"
+  "build/main.log"
+  "build/main.pdf"
+  (rewritten before read)

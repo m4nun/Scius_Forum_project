@@ -1,0 +1,169 @@
+\section{Example from Brenner and Foster}
+
+\begin{frame}{Example from Brenner and Foster's Paper}
+    \begin{block}{Equation 8.021 from their paper}
+        \[1 + 5^a = 7^b + 7^c\]
+    \end{block}
+    
+    \vspace{0.3cm}
+    This is one of the equations they successfully solved using the modulo trick.
+    
+    \textbf{Why this example?}
+    \begin{itemize}
+        \item It's a concrete demonstration of how the method works
+        \item Shows the step-by-step reasoning
+        \item Illustrates the power of congruence methods
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    Let's walk through their solution...
+\end{frame}
+
+\begin{frame}{Step 1: Set Up the Problem}
+    We want to find all non-negative integers $(a,b,c)$ such that:
+    \[1 + 5^a = 7^b + 7^c\]
+    
+    \vspace{0.3cm}
+    \textbf{Observation:} The equation is symmetric in $b$ and $c$, so we can assume $b \leq c$ without loss of generality.
+    
+    \textbf{Strategy:} Use modular arithmetic to find constraints on $a$, $b$, and $c$.
+\end{frame}
+
+\begin{frame}{Step 2: Modulo 7 Analysis}
+    Consider the equation modulo 7:
+    \[1 + 5^a \equiv 7^b + 7^c \pmod 7\]
+    
+    Since $7^b \equiv 0 \pmod 7$ and $7^c \equiv 0 \pmod 7$ for $b,c \geq 1$:
+    \[1 + 5^a \equiv 0 \pmod 7\]
+    
+    This means:
+    \[5^a \equiv 6 \pmod 7\]
+    
+    \textbf{Question:} For which $a$ does $5^a \equiv 6 \pmod 7$?
+\end{frame}
+
+\begin{frame}{Step 3: Pattern of $5^a$ Modulo 7}
+    Let's compute the pattern:
+    
+    \begin{tabular}{c|c}
+        $a$ & $5^a \pmod 7$ \\ \hline
+        1 & 5 \\
+        2 & 4 \\
+        3 & 6 \\
+        4 & 2 \\
+        5 & 3 \\
+        6 & 1 \\
+        7 & 5 \\
+        8 & 4 \\
+        9 & 6 \\
+        $\vdots$ & $\vdots$
+    \end{tabular}
+    
+    \vspace{0.2cm}
+    \textbf{Pattern:} The sequence repeats every 6 steps.
+    
+    \textbf{Conclusion:} $5^a \equiv 6 \pmod 7$ when $a \equiv 3 \pmod 6$.
+\end{frame}
+
+\begin{frame}{Step 4: Modulo 9 Analysis}
+    Now consider the equation modulo 9:
+    \[1 + 5^a \equiv 7^b + 7^c \pmod 9\]
+    
+    First, find the pattern of $7^b$ modulo 9:
+    
+    \begin{tabular}{c|c}
+        $b$ & $7^b \pmod 9$ \\ \hline
+        1 & 7 \\
+        2 & 4 \\
+        3 & 1 \\
+        4 & 7 \\
+        5 & 4 \\
+        6 & 1 \\
+        $\vdots$ & $\vdots$
+    \end{tabular}
+    
+    \vspace{0.2cm}
+    So for $b \geq 1$, $7^b \in \{1,4,7\} \pmod 9$.
+\end{frame}
+
+\begin{frame}{Step 5: Compute $5^a$ Modulo 9 for $a \equiv 3 \pmod 6$}
+    We know $a \equiv 3 \pmod 6$, so let's compute $5^a \pmod 9$:
+    
+    \begin{align*}
+        5^3 &= 125 \equiv 8 \pmod 9 \\
+        5^9 &= 5^{3+6} = 5^3 \cdot 5^6 \\
+        5^6 &\equiv 1 \pmod 9 \text{ (by Euler's theorem)} \\
+        \therefore 5^9 &\equiv 8 \cdot 1 = 8 \pmod 9
+    \end{align*}
+    
+    In fact, for any $a \equiv 3 \pmod 6$, we have $5^a \equiv 8 \pmod 9$.
+    
+    Therefore:
+    \[1 + 5^a \equiv 1 + 8 = 9 \equiv 0 \pmod 9\]
+\end{frame}
+
+\begin{frame}{Step 6: Compare Both Sides Modulo 9}
+    We have:
+    \begin{itemize}
+        \item Left-hand side: $1 + 5^a \equiv 0 \pmod 9$
+        \item Right-hand side: $7^b + 7^c \pmod 9$ where $7^b, 7^c \in \{1,4,7\}$
+    \end{itemize}
+    
+    Check all possible sums:
+    \begin{center}
+    \begin{tabular}{c|c|c}
+        $7^b$ & $7^c$ & Sum $\pmod 9$ \\ \hline
+        1 & 1 & 2 \\
+        1 & 4 & 5 \\
+        1 & 7 & 8 \\
+        4 & 4 & 8 \\
+        4 & 7 & 2 \\
+        7 & 7 & 5
+    \end{tabular}
+    \end{center}
+    
+    \textbf{None} of these sums equal $0 \pmod 9$!
+    
+    This is a contradiction unless our assumption was wrong.
+\end{frame}
+
+\begin{frame}{Step 7: Resolving the Contradiction}
+    The contradiction arose because we assumed $b,c \geq 2$ when using modulo 9.
+    
+    Therefore, at least one of $b$ or $c$ must be $\leq 1$.
+    
+    \textbf{Possibilities:}
+    \begin{itemize}
+        \item $b = 0$ or $b = 1$
+        \item $c = 0$ or $c = 1$
+    \end{itemize}
+    
+    By symmetry, we only need to check a few cases:
+    \begin{itemize}
+        \item $(b,c) = (0,0)$, $(0,1)$, $(1,0)$, $(1,1)$
+    \end{itemize}
+    
+    Only $(0,0)$ yields a solution: $(a,b,c) = (0,0,0)$.
+\end{frame}
+
+\begin{frame}{Final Result from Brenner and Foster}
+    \begin{theoremss}[Brenner and Foster, 1982]
+        The only non-negative integer solution to
+        \[1 + 5^a = 7^b + 7^c\]
+        is $(a,b,c) = (0,0,0)$.
+    \end{theoremss}
+    
+    \vspace{0.3cm}
+    \textbf{Key insight:} The modulo trick worked because:
+    \begin{itemize}
+        \item Modulo 7 gave a condition on $a$
+        \item Modulo 9 forced a contradiction unless $b$ or $c$ was small
+        \item This gave an upper bound, making the equation computable
+    \end{itemize}
+    
+    This is a perfect example of a successful application of the modulo trick.
+\end{frame}
+
+% ================================================================================
+% Section 3: The Modulo Trick - Intuitive Introduction
+% ================================================================================

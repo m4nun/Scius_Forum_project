@@ -1,0 +1,51 @@
+\section{The Problem}
+
+\begin{frame}{But They Found Equations That Resist the Method}
+    \centering
+    \normalsize Brenner and Foster encountered some equations that did not yield to the modulo trick.
+
+    \vspace{0.25cm}
+    \begin{beamercolorbox}[rounded=true,shadow=true,sep=0.75em,wd=1\textwidth,center]{block body}
+        \small
+        ``The equations $(pq)^x - p^y - q^z + 1 = 0$ and $p^x - p^y + q^z - q^w = 0$
+        \textbf{seem not amenable} to our method.''
+    \end{beamercolorbox}
+
+    \vspace{0.25cm}
+    \vspace{0.05cm}
+    \begin{beamercolorbox}[rounded=true,shadow=true,sep=0.75em,wd=1\textwidth,center]{block body}
+        \small
+        \textbf{They observed:} No matter which moduli they tried, they could not find upper bounds
+        for the exponents. The method kept looping without ever reaching a contradiction.
+    \end{beamercolorbox}
+\end{frame}
+
+\begin{frame}{The Gap in the Literature}
+    \textbf{What was missing}
+    \begin{itemize}
+        \item \textbf{Formal definition of solvable with modulo trick}
+        \item \textbf{Rigorous reason some equations remain non-solvable}
+        \item \textbf{Mathematical framework for the heuristic method}
+    \end{itemize}
+
+    \vspace{0.15cm}
+    \textbf{Our research questions}
+    \begin{enumerate}
+        \item What does it \textbf{mean} for an equation to be "solvable by modulo trick"?
+        \begin{itemize}
+            \item \textbf{Short answer:} Repeated congruence checks leave only a bounded set of candidates.
+        \end{itemize}
+        \item Why are some equations "non-solvable" by this method?
+        \begin{itemize}
+            \item \textbf{Short answer:} Every finite modulus still leaves infinitely many unbounded candidates.
+        \end{itemize}
+        \item Can we \textbf{prove} the non-solvability of the cases Brenner and Foster observed?
+        \begin{itemize}
+            \item \textbf{Short answer:} Yes. We proved the main families and recovered their examples as corollaries.
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+% ================================================================================
+% Section 5: Objectives and Methodology
+% ================================================================================

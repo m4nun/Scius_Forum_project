@@ -1,0 +1,80 @@
+\section{Understanding the Modulo Trick}
+
+\begin{frame}{How the Modulo Trick Works - Flowchart}
+    \begin{figure}[h!]
+        \centering
+        \scalebox{0.5}{\begin{tikzpicture}[
+            node distance=1cm,
+            every node/.style={font=\small},
+            box/.style={
+                rectangle,
+                draw,
+                rounded corners,
+                align=center,
+                minimum width=4.5cm,
+                minimum height=0.9cm,
+                fill=blue!10
+            },
+            decision/.style={
+                diamond,
+                draw,
+                align=center,
+                aspect=2,
+                inner sep=2pt,
+                fill=green!10
+            },
+            arrow/.style={->, thick}
+        ]
+        
+        % Nodes
+        \node[box] (eq) {$1+5^a = 7^b + 7^c$};
+        
+        \node[box, below=of eq] (choosem) {Choose modulus $m$};
+        
+        \node[box, below=of choosem] (mod) {Find condition on exponents from $1+5^a \equiv 7^b+7^c \pmod m$};
+        
+        \node[decision, below=1cm of mod] (bound) {Found upper bound\\ of $a$ or $b,c$?};
+        
+        \node[box, below=of bound] (prop) {Check all finitely many cases};
+        
+        \node[box, below=of prop] (complete) {Complete solution found};
+        
+        % Arrows
+        \draw[arrow] (eq) -- (choosem);
+        \draw[arrow] (choosem) -- (mod);
+        \draw[arrow] (mod) -- (bound);
+        
+        \draw[arrow] (bound) -- node[right] {Yes} (prop);
+        \draw[arrow] (prop) -- (complete);
+        
+        % False loop
+        \draw[arrow]
+            (bound.east)
+            -- node[pos=0.05, right, yshift=7pt] {No}
+            ++(2,0)
+            |- (choosem.east);
+        
+        \end{tikzpicture}}
+        \caption{The modulo trick method applied to $1+5^a = 7^b+7^c$}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Brenner and Foster's Success with Modulo Trick}
+    Using the modulo trick, Brenner and Foster successfully solved many equations of the form $1+p^a = q^b + r^c$:
+    
+    \vspace{0.3cm}
+    Examples they solved:
+    \begin{itemize}
+        \item $1+5^a = 7^b + 7^c$ (as we just saw)
+        \item $1+2^a = 3^b + 5^c$
+        \item $1+13^a = 17^b + 17^c$
+        \item Many others with different base combinations
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    The method worked well for these cases - they could always find some modulus that forced an upper bound on at least one variable.
+\end{frame}
+
+% ================================================================================
+% Section 4: The Problem - Equations That Resist the Modulo Trick
+% ================================================================================
